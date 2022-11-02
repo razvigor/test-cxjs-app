@@ -1,4 +1,5 @@
 import { rest } from 'msw';
+import { randomElement } from './randomElement';
 import { getComparer } from 'cx/data';
 import { getRandomCustomer } from './customers';
 import { getRandomProduct } from './products';
@@ -23,7 +24,7 @@ const invoices = Array.from({ length: 2000 }, (_, index) => {
       };
    });
 
-   const date = Date.now() - Math.random() * 90 * 86400 * 1000;
+   const date = Date.now() - Math.random() * 730 * 86400 * 1000;
    const dueDate = date + 14 * 86400 * 1000;
 
    const totalAmount = items.reduce((acc, item) => acc + item.totalAmount, 0);
@@ -41,6 +42,9 @@ const invoices = Array.from({ length: 2000 }, (_, index) => {
       totalAmount,
    };
 });
+export function getRandomInvoices() {
+   return randomElement(invoices);
+}
 
 export const invoiceEndpoints = [
    rest.get('/api/invoices', (req, res, ctx) => {
@@ -64,7 +68,7 @@ export const invoiceEndpoints = [
          var compare = getComparer([{ value: { bind: sortField }, direction: sortDir }]);
          results.sort(compare); //simulate database sort
       }
-      
+
       results = results.slice((page - 1) * pageSize, page * pageSize);
 
       return res(ctx.json(results));

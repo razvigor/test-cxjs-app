@@ -8,6 +8,7 @@ import { CheckerLayout } from '../layout/CheckerLayout';
 import SignIn from './pages/sign-in';
 import { SandboxedRoute } from '../components/SandboxedRoute';
 import InvoiceRoutes from './invoices';
+import CustomerRoutes from './customers';
 import { PageNotImplemented } from '../components/PageNotImplemented';
 
 export default () => (
@@ -25,9 +26,10 @@ export default () => (
             <SandboxedRoute route="~/dashboard">
                <Dashboard />
             </SandboxedRoute>
-            <Route route="~/customers" url-bind="url" prefix>
+            {/* <Route route="~/customers" url-bind="url" prefix>
                <PageNotImplemented />
-            </Route>
+            </Route> */}
+            {CustomerRoutes}
             <Route route="~/settings" url-bind="url" prefix>
                <PageNotImplemented />
             </Route>
@@ -53,6 +55,6 @@ export default () => (
          params={1}
          onResolve={() => import(/* webpackChunkName: "overlays" */ '../overlays').then((x) => x.default)}
       />
-      <DocumentTitle append text="Demo App" separator=" | " />
+      <DocumentTitle append text="Test CxJS App" separator=" | " />
    </cx>
 );
