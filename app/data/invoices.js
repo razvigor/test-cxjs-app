@@ -10,6 +10,7 @@ let lastId = 0;
 const invoices = Array.from({ length: 2000 }, (_, index) => {
    const items = Array.from({ length: 1 + Math.random() * 4 }, (_, index) => {
       let product = getRandomProduct();
+
       let qty = Math.ceil(Math.random() * 10);
       return {
          id: index + 1,

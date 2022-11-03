@@ -95,14 +95,16 @@ export default class extends Controller {
       });
    }
 
-   onQueryProducts(q) {
+   onQueryProducts(q, { store }) {
       return GET('products');
    }
 
    onAddItem() {
+      let itemDiscount = store.get('$page.invoice.customer.discount');
       this.nextItemId = this.nextItemId || -1;
       this.store.update('$page.invoice.items', append, {
          id: this.nextItemId--,
+         discountPct: Math.round(itemDiscount),
       });
    }
 

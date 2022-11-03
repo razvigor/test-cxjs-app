@@ -1,5 +1,15 @@
 import { computable, LabelsTopLayout } from 'cx/ui';
-import { Button, DateField, Grid, Label, LinkButton, LookupField, NumberField, ValidationGroup } from 'cx/widgets';
+import {
+   Button,
+   DateField,
+   Grid,
+   Label,
+   LinkButton,
+   LookupField,
+   NumberField,
+   ValidationGroup,
+   TextField,
+} from 'cx/widgets';
 import { GET } from '../../../api/util/methods';
 
 export default () => (
