@@ -104,7 +104,7 @@ export default class extends Controller {
       this.nextItemId = this.nextItemId || -1;
       this.store.update('$page.invoice.items', append, {
          id: this.nextItemId--,
-         discountPct: parseFloat(itemDiscount).toFixed(2),
+         discountPct: itemDiscount ? round2(parseFloat(itemDiscount)) : 7.65,
       });
    }
 

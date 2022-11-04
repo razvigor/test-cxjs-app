@@ -88,7 +88,6 @@ export default () => (
                   </div>
                </div>
             </div>
-
             <Label>List of invoices</Label>
 
             <Grid
