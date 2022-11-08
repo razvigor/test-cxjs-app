@@ -47,6 +47,7 @@ function fakeArr() {
 }
 
 const invoices = fakeArr();
+
 export function getRandomInvoices() {
    return randomElement(invoices);
 }

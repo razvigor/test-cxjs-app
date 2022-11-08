@@ -18,6 +18,7 @@ function invoices() {
 const yearBehind = new Date();
 yearBehind.setFullYear(yearBehind.getFullYear() - 1);
 const lastYear = new Date().getFullYear() - 1;
+
 customers.forEach((customer) => {
    customer.id = ++lastId;
    customer.country = 'USA';
