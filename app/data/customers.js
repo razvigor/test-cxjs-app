@@ -17,7 +17,7 @@ function invoices() {
 }
 const yearBehind = new Date();
 yearBehind.setFullYear(yearBehind.getFullYear() - 1);
-const lastYear = new Date().getFullYear() - 1;
+
 customers.forEach((customer) => {
    customer.id = ++lastId;
    customer.country = 'USA';
@@ -53,7 +53,7 @@ customers.forEach((customer) => {
 
    customer.lastYearInvoicesAmount = customer.invoices
       .filter((invoice) => {
-         return new Date(invoice.date).getFullYear() === lastYear;
+         return new Date(invoice.date).getFullYear() === yearBehind;
       })
       .reduce((acc, item) => (acc += item.totalAmount), 0)
       .toFixed(2);
