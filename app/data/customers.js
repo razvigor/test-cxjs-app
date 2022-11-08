@@ -10,9 +10,11 @@ const cities = ['New York', 'Los Angeles', 'Chicago', '	Houston', 'Phoenix', 'Da
 
 let lastId = 0;
 
-const invoices = Array.from({ length: 400 }, (_, index) => {
-   return getRandomInvoices();
-});
+function invoices() {
+   return Array.from({ length: 400 }, (_, index) => {
+      return getRandomInvoices();
+   });
+}
 const yearBehind = new Date();
 yearBehind.setFullYear(yearBehind.getFullYear() - 1);
 const lastYear = new Date().getFullYear() - 1;
@@ -30,7 +32,7 @@ customers.forEach((customer) => {
    )}`;
    customer.discount = `${(Math.random() * 10).toFixed(2)}`;
    customer.invoices = JSON.parse(
-      JSON.stringify(invoices.filter((invoice) => invoice.customer.name === customer.name))
+      JSON.stringify(invoices().filter((invoice) => invoice.customer.name === customer.name))
    );
 
    customer.unpaidInvoicesAllAmount = customer.invoices

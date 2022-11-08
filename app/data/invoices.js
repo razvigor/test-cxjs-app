@@ -7,42 +7,45 @@ import { getSearchQueryPredicate } from 'cx/util';
 
 let lastId = 0;
 
-const invoices = Array.from({ length: 2000 }, (_, index) => {
-   const items = Array.from({ length: 1 + Math.random() * 4 }, (_, index) => {
-      let product = getRandomProduct();
+function fakeArr() {
+   return Array.from({ length: 2000 }, (_, index) => {
+      const items = Array.from({ length: 1 + Math.random() * 4 }, (_, index) => {
+         let product = getRandomProduct();
 
-      let qty = Math.ceil(Math.random() * 10);
+         let qty = Math.ceil(Math.random() * 10);
+         return {
+            id: index + 1,
+            productId: product.id,
+            productName: product.name,
+            unitPrice: product.unitPrice,
+            qty,
+            discountPct: 0,
+            regularAmount: qty * product.unitPrice,
+            discountAmount: 0,
+            totalAmount: qty * product.unitPrice,
+         };
+      });
+
+      const date = Date.now() - Math.random() * 730 * 86400 * 1000;
+      const dueDate = date + 14 * 86400 * 1000;
+
+      const totalAmount = items.reduce((acc, item) => acc + item.totalAmount, 0);
+
       return {
-         id: index + 1,
-         productId: product.id,
-         productName: product.name,
-         unitPrice: product.unitPrice,
-         qty,
-         discountPct: 0,
-         regularAmount: qty * product.unitPrice,
+         id: ++lastId,
+         invoiceNo: 10000 + lastId,
+         customer: getRandomCustomer(),
+         status: Math.random() > 0.1 ? 'paid' : 'unpaid',
+         items,
+         date,
+         dueDate,
+         regularAmount: totalAmount,
          discountAmount: 0,
-         totalAmount: qty * product.unitPrice,
+         totalAmount,
       };
    });
-
-   const date = Date.now() - Math.random() * 730 * 86400 * 1000;
-   const dueDate = date + 14 * 86400 * 1000;
-
-   const totalAmount = items.reduce((acc, item) => acc + item.totalAmount, 0);
-
-   return {
-      id: ++lastId,
-      invoiceNo: 10000 + lastId,
-      customer: getRandomCustomer(),
-      status: Math.random() > 0.1 ? 'paid' : 'unpaid',
-      items,
-      date,
-      dueDate,
-      regularAmount: totalAmount,
-      discountAmount: 0,
-      totalAmount,
-   };
-});
+}
+const invoices = fakeArr();
 export function getRandomInvoices() {
    return randomElement(invoices);
 }
